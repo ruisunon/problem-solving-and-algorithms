@@ -1,0 +1,29 @@
+package {{ qc.packageName }};
+
+import org.junit.runner.RunWith;
+import util.runner.Answer;
+import util.runner.LeetCodeRunner;
+import util.runner.TestData;
+import util.runner.data.DataExpectation;
+import java.util.*;
+
+/**
+ * [{{q.difficulty}}] {{ q.no }}. {{ q.title }}
+ * {{ q.url }}
+ *
+{{ desc }}
+ */
+@RunWith(LeetCodeRunner.class)
+public class {{ qc.className }} {
+
+    @Answer
+{{ code }}
+
+    {{- for(var i = 0; i < qc.exampleCount; i++) { -}}
+    @TestData
+    public DataExpectation example{{ qc.exampleCount == 1 ? '' : (i + 1).toString() }} = DataExpectation.{{ qc.methodArgumentCount == 1 ? 'create' : 'createWith' }}({{- if(qc.examples.length > i) { -}}{{-     for(var j = 0; j < qc.examples[i].inputs.length; j++) { -}}{{ qc.examples[i].inputs[j] + (j == qc.examples[i].inputs.length - 1 ? '' : ', ') }}{{-     } -}}{{- } -}})
+        .expect({{- if(qc.examples.length > i) { -}}{{ qc.examples[i].output }}{{- } -}});
+
+    {{- } -}}
+}
+

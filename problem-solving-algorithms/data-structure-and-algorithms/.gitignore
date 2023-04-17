@@ -1,0 +1,9 @@
+a.out
+.history
+.idea/
+*.class
+venv/
+*.pdf
+__pycache__/
+
+build/
